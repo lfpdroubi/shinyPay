@@ -24,11 +24,13 @@ makepaymenturi <- function(address, amount) paste0("bitcoin:",address,"?amount="
 plotQR <- function(to_encode){
     mar <- par(mar=c(0,0,0,0))
     on.exit(par(mar))
-    if(requireNamespace("qrencoder", quietly = TRUE)){
+    if(requireNamespace("qrcode", quietly = TRUE)){
         suppressPackageStartupMessages(require("raster")) # cannot image without attaching raster package
-        image(qrencoder::qrencode_raster(to_encode), asp=1, col=c("white", "black"), axes=FALSE, xlab="", ylab="")
+        suppressPackageStartupMessages(require("qrcode")) # cannot generate QRcode without attaching qrcode package
+        image(qrcode_gen(to_encode, plotQRcode = FALSE, dataOutput = TRUE),
+                asp=1, col=c("white", "black"), axes=FALSE, xlab="", ylab="")
     } else {
         plot(c(0, 1), c(0, 1), ann=FALSE, bty="n", type="n", xaxt="n", yaxt="n")
-        text(x = 0.5, y = 0.5, "To display QR Code install hrbrmstr/qrencoder package", col = "black")
+        text(x = 0.5, y = 0.5, "To display QR Code install qrcode package", col = "black")
     }
 }
