@@ -1,16 +1,12 @@
 library(shiny)
 source("bitcoind.R")
 
-### qrencoder is optional pkg for plotting qr codes - not tested on windows
-## install using drat # install.packages("drat")
-# drat::addRepo("hrbrmstr")
-# install.packages("qrencoder")
-## install using devtools # install.packages("devtools")
-# devtools::install_github("hrbrmstr/qrencoder")
+### qrcode is optional pkg for plotting qr codes
+## install using CRAN (install.packages("qrcode"))
 
 # bitcoin node ------------------------------------------------------------
 
-options(rpchost = "192.168.56.103",
+options(rpchost = "127.0.0.1",
         rpcuser = "bitcoinduser",
         rpcpassword = "userpassbitcoind")
 
